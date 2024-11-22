@@ -7,5 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('', include('usuarios.urls')),
-    # path('blog/', include('blog.urls')),
+    path('blog/', include('blog.urls')),
 ]
