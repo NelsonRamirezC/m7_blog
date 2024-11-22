@@ -1,26 +1,13 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url "index" %}">EJEMPLO CRUD</a>
+      <a class="navbar-brand" href="{% url "index" %}">Mi Blog</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav w-100 justify-content-lg-between">
             <div class="d-flex flex-column flex-lg-row">
-              <a class="nav-link" href="{% url "index" %}">Home</a>
-              <a class="nav-link" href="{% url "listado_productos" %}">Productos</a>
-              <a class="nav-link" href="{% url "add_producto" %}">Add producto</a>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Academia
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url "cursos" %}">Cursos</a></li>
-                  <li><a class="dropdown-item" href="{% url "estudiantes" %}">Estudiantes</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Otras acciones</a></li>
-                </ul>
-              </li>
+              <a class="nav-link" href="">Home</a>
             </div>
             <div class="d-flex flex-column flex-lg-row">
               {% if not user.is_authenticated %}
