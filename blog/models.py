@@ -22,7 +22,7 @@ class Post(models.Model):
     contenido = models.TextField(null=False, blank=False)
     fecha_creacion = models.DateField(auto_created=True, auto_now_add=True)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=False, blank=False, default=None)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=False, blank=False, default=4)
 
 
     def __str__(self):
