@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.shortcuts import render
 
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Group
 
 from django.contrib.auth.models import User
 from .models import Perfil
@@ -26,8 +26,13 @@ class UserRegistroView(CreateView):
         
         response = super().form_valid(form)
         usuario = form.instance # obtenemos la istancia de la Clase User
-        permiso = Permission.objects.get(codename='can_edit_clubes') # obtener permiso desde la base de datos
-        usuario.user_permissions.add(permiso) # le agregamos el permiso al usuario
+        
+        #obtenemos la instancia del grupo por defecto que tendrán los usuarios
+        grupo_usuarios = Group.objects.get(name="usuarios")
+        
+        #agregamos a los usuarios recién registrados al grupo por defecto.
+        usuario.groups.add(grupo_usuarios)
+        
         usuario.save()
 
         messages.success(self.request, 'Registro exitoso.')

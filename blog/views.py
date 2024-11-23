@@ -9,3 +9,9 @@ def posts(request):
     posts = Post.objects.all().order_by("-id")
     contexto["posts"] = posts
     return render(request, 'blog/posts.html', contexto)
+
+
+def crear_post(request):
+    contexto = {}
+    
+    return render(request, 'blog/crear_post.html', contexto)
