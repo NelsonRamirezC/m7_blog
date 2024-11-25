@@ -12,7 +12,10 @@
         <h2>entradas del blog:</h2>
             <ul>
                 {% for post in posts %}
-                    <li>{{post.autor.username}}, ID post: ({{post.id}}): {{post.titulo}}</li>
+                    <li>
+                        {{post.autor.username}}, ID post: ({{post.id}}): {{post.titulo}}
+                        <a href="{% url "detalle_post" post.id %}">Ver detalle</a>
+                    </li>
                 {% endfor %}
             </ul>
     </section>

@@ -1,0 +1,51 @@
+{% extends "layouts/base.html" %}
+
+{% block contenido %}
+
+<div class="position-fixed" style="left: 51px; top: 73px;">
+     <a href="/blog/" class="btn btn-primary" style="left: 100px;">Volver a posts....</a>
+</div>
+
+<header>
+    <h1 class="text-center py-3">Post id: {{post.id}}</h1>
+</header>
+
+<main class="container">
+    <section id="detalle_post">
+
+        <div class="card w-75 mb-3 mx-auto">
+            <div class="card-body">
+              <h5 class="card-title">{{post.titulo}}</h5>
+              <p class="card-text">{{post.contenido}}</p>
+              <p class="card-text">Fecha publicación: {{post.fecha_creacion}}</p>
+              <p class="card-text">Categoría: {{post.categoria.nombre}}</p>
+              <p class="card-text text-end fw-bold">Autor: {{post.autor.username}}</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="comentarios_post">
+        <h3>últimos comentarios...</h3>
+
+        {% for comentario in  comentarios %}
+        <div class="card mb-3 w-50 mx-auto">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="..." class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Autor: {{comentario.autor.username}}</h5>
+                  <p class="card-text">{{comentario.contenido}}</p>
+                  <p class="card-text">Fecha comentario:{{comentario.fecha|date:"D d M Y"}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+    </section>
+
+</main>
+
+{% endblock contenido %}

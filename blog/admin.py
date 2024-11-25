@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Categoria
+from .models import Post, Categoria, Comentario
 
 # Register your models here.
 
@@ -19,3 +19,12 @@ class CategoriaAdmin(admin.ModelAdmin):
     
 
 admin.site.register(Categoria, CategoriaAdmin)
+
+
+class ComentarioAdmin(admin.ModelAdmin):
+    list_display = ('id', 'contenido', 'fecha')
+    search_fields = ('contenido',)
+    list_filter = ('autor', 'fecha')
+    
+
+admin.site.register(Comentario, ComentarioAdmin)
