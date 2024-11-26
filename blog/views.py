@@ -63,3 +63,24 @@ def crear_post(request):
         else:
             messages.error(request, "Algo ha fallado, revise bien los datos ingresados.")
             return render(request, 'blog/crear_post.html', contexto)
+
+
+def agregar_comentario(request, post_id):
+    if request.method == "POST":
+        contenido = request.POST.get("contenido")
+        
+        post = Post.objects.get(id=post_id)
+        
+        print(contenido)
+        print(post)
+        print(request.user)
+        
+        nuevo_comentario = Comentario(contenido=contenido, post=post, autor=request.user)
+        
+        nuevo_comentario.save()
+
+        messages.success(request, "Comentario creado con éxito")
+        return redirect('detalle_post', post_id)
+    else:
+        messages.error(request, "Acción / método no permitido")
+        return redirect('posts')
