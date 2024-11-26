@@ -86,6 +86,33 @@ def agregar_comentario(request, post_id):
         return redirect('posts')
     
     
+@login_required(login_url="login")
+@permission_required("blog.delete_comentario", login_url="index")
+def eliminar_comentario(request, comentario_id):
+    contexto = {}
+    try:
+        comentario = Comentario.objects.get(id=comentario_id)
+        
+        if comentario.autor != request.user:
+            messages.error(request, f"Usted no es el autor del comentario, no puede eliminarlo")
+            return redirect('index')
+        
+    except comentario.DoesNotExist as e:
+        messages.error(request, f"No existe un comentario con id: {comentario_id}")
+        return redirect('posts')
+    
+    if request.method == "POST":
+        comentario.delete()
+        messages.success(request, "Comentario eliminado con éxito")
+        return redirect('posts')
+    else:
+        # BLOQUE GET
+        contexto["comentario"] = comentario 
+        return render(request, 'blog/eliminar_comentario.html', contexto)
+    
+    
+    
+    
     
 def ejemplo_datatables(request):
     contexto = {}

@@ -13,15 +13,8 @@
 <main class="container">
     <section id="detalle_post">
 
-        <div class="card w-75 mb-3 mx-auto">
-            <div class="card-body">
-              <h5 class="card-title">{{post.titulo}}</h5>
-              <p class="card-text">{{post.contenido}}</p>
-              <p class="card-text">Fecha publicación: {{post.fecha_creacion}}</p>
-              <p class="card-text">Categoría: {{post.categoria.nombre}}</p>
-              <p class="card-text text-end fw-bold">Autor: {{post.autor.username}}</p>
-            </div>
-        </div>
+      {% include 'partials/card_post.html ' with post=post medida=75%}
+
     </section>
 
     <section>
@@ -51,10 +44,27 @@
         <div class="card mb-3 w-50 mx-auto">
             <div class="row g-0">
               <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
+                <img src="https://picsum.photos/id/237/150/150" class="img-fluid rounded-start" alt="...">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
+                  {% if user == comentario.autor%}
+                  <div class="d-flex justify-content-end">
+                    <a href="" class="mx-2"
+                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Actualizar"
+                    data-bs-custom-class="custom-actualizar"
+                    >
+                      <i class="fa-solid fa-pen-to-square text-warning"></i>
+                    </a>
+                    <a href="{% url "eliminar_comentario" comentario.id %}" class="mx-2"
+                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Eliminar"
+                    data-bs-custom-class="custom-eliminar"
+                    >
+                      <i class="fa-regular fa-trash-can text-danger"></i>
+                    </a>
+                  </div>
+                  {% endif %}
+
                   <h5 class="card-title">Autor: {{comentario.autor.username}}</h5>
                   <p class="card-text">{{comentario.contenido}}</p>
                   <p class="card-text">Fecha comentario:{{comentario.fecha|date:"D d M Y"}}</p>
@@ -67,5 +77,22 @@
     </section>
 
 </main>
+
+<style>
+  .custom-actualizar {
+    --bs-tooltip-bg: var(--bs-warning);
+    --bs-tooltip-color: var(--bs-white);
+  }
+
+  .custom-eliminar {
+    --bs-tooltip-bg: var(--bs-danger);
+    --bs-tooltip-color: var(--bs-white);
+  }
+</style>
+
+<script>
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
 
 {% endblock contenido %}
