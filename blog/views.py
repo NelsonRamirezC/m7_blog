@@ -84,3 +84,11 @@ def agregar_comentario(request, post_id):
     else:
         messages.error(request, "Acción / método no permitido")
         return redirect('posts')
+    
+    
+    
+def ejemplo_datatables(request):
+    contexto = {}
+    posts = Post.objects.all()
+    contexto["posts"] = posts
+    return render(request, 'blog/ejemplo_datatables.html', contexto)
