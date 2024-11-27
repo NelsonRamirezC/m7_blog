@@ -1,6 +1,21 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url "index" %}">Mi Blog</a>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Tema
+        </button>
+        <ul class="dropdown-menu">
+          {% if request.session.tema != 'dia' %}
+            <li><a id="tema_dia" class="dropdown-item" href="{% url 'tema' 'dia' %}"><i class="fa-regular fa-sun"></i></a></li>
+          {% endif %}
+          
+          {% if request.session.tema != 'noche' %}
+            <li><a id="tema_noche" class="dropdown-item" href="{% url 'tema' 'noche' %}"><i class="fa-regular fa-moon"></i></a></li>
+          {% endif %}
+
+        </ul>
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -32,3 +47,32 @@
       </div>
     </div>
   </nav>
+
+
+  <!-- <script>
+
+    let tema_dia = document.getElementById("tema_dia")
+    let tema_noche = document.getElementById("tema_noche")
+
+    const cambiar_tema = async (tema) => {
+      const response = await fetch("/tema/"+tema);
+      const data = await response.json()
+      
+      if(data.status == "ok"){
+        location.reload()
+      }
+      
+    }
+
+    tema_dia.addEventListener("click", (event) => {
+      event.preventDefault();
+      cambiar_tema("dia")
+    })
+
+    tema_noche.addEventListener("click", (event) => {
+      event.preventDefault();
+      cambiar_tema("noche")
+    })
+
+
+  </script> -->
